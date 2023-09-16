@@ -1,6 +1,15 @@
 //a backend kölünválasztva
 import {db} from "./firebaseApp";
-import {collection, addDoc,doc,deleteDoc,query,where,getDocs,serverTimestamp, updateDoc } from "firebase/firestore";
+import {collection, addDoc,doc,deleteDoc,query,where,getDocs,serverTimestamp, updateDoc,orderBy,onSnapshot } from "firebase/firestore";
+
+export const readTodos = (setTodos) => {
+  const collectionRef = collection(db, "todolist");
+  const q = query(collectionRef, orderBy('timestamp', 'desc'));
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    setTodos(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+  });
+  return unsubscribe;
+};
 
 export const addTodo =async (input) => {
     const collectionRef= collection(db, "todolist");

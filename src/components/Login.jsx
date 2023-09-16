@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,33 +8,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
-import {signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from '../firebaseApp'
-
-
+import { UserContext } from '../context/UserContext';
 
 const defaultTheme = createTheme();
 
 export const Login=()=> {
- 
+  const {loginUser}=useContext(UserContext)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-   /* console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });*/
-    login(data.get('email'),data.get('password'),)
+    loginUser(data.get('email'),data.get('password'),)
   };
-  const login=async (email,password)=>{
-    try{
-       await signInWithEmailAndPassword(auth,email,password)
-    }catch(err){
-        console.log(err.message)
-    }
-}
 
   return (
     <ThemeProvider theme={defaultTheme}>
