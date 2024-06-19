@@ -1,6 +1,7 @@
 //a backend kölünválasztva
 import {db} from "./firebaseApp";
-import {collection, addDoc,doc,deleteDoc,query,where,getDocs,serverTimestamp, updateDoc,orderBy,onSnapshot } from "firebase/firestore";
+import {collection, addDoc,doc,deleteDoc,query,
+  where,getDocs,serverTimestamp, updateDoc,orderBy,onSnapshot } from "firebase/firestore";
 
 export const readTodos = (setTodos) => {
   const collectionRef = collection(db, "todolist");

@@ -5,7 +5,8 @@ import React,{useEffect} from 'react'
 
 function App() {
   useEffect(()=>{
-    const unsubscribe=onSnapshot( collection(db,'todolist'),(snapshot)=>{
+    const todolistCollectionRef=collection(db,'todolist')
+    const unsubscribe=onSnapshot(todolistCollectionRef ,(snapshot)=>{
       //console.log((snapshot.docs));
       console.log(snapshot.docs.map(doc=>doc.data()));
    })
